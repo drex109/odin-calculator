@@ -18,20 +18,21 @@ function divide(x, y) {
 function operate(x, operator, y) {
     switch(operator) {
         case '+':
-            add(x, y);
+            return add(x, y);
         case '-':
-            subtract(x, y);
-        case '*':
-            multiply(x, y);
+            return subtract(x, y);
+        case 'x':
+            return multiply(x, y);
         case '/':
-            divide(x, y);
+            return divide(x, y);
     }
 }
 
 let display = document.querySelector('#solution');
 let buttons = document.querySelectorAll('.button');
 let clear = document.querySelector('.clear')
-let calculation
+let equal = document.querySelector('.equal')
+let calculation = '';
 
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -41,5 +42,12 @@ buttons.forEach(button => {
 })
 
 clear.addEventListener('click', (e) => {
-    display.textContent = ''
+    display.textContent = '';
+    calculation = '';
+})
+
+equal.addEventListener('click', (e) => {
+    let inputs = calculation.split(' ');
+    ans = operate(Number(inputs[0]), inputs[1], Number(inputs[2]))
+    display.textContent = String(Math.round(ans * 10) / 10);
 })
