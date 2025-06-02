@@ -8,6 +8,7 @@ function multiply(x, y) {
     return x * y;
 }
 function divide(x, y) {
+    if (y === 0) return 'nah bro';
     return x / y;
 }
 // console.log(add(2, 3))
@@ -33,6 +34,7 @@ let buttons = document.querySelectorAll('.button');
 let clear = document.querySelector('.clear')
 let equal = document.querySelector('.equal')
 let calculation = '';
+let ans;
 
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -44,10 +46,16 @@ buttons.forEach(button => {
 clear.addEventListener('click', (e) => {
     display.textContent = '';
     calculation = '';
+    ans = undefined;
 })
 
 equal.addEventListener('click', (e) => {
     let inputs = calculation.split(' ');
-    ans = operate(Number(inputs[0]), inputs[1], Number(inputs[2]))
+    if(ans == undefined) {
+        ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]))
+    } else {
+        ans = operate(ans, inputs[1].trim(), Number(inputs[2]))
+    }
     display.textContent = String(Math.round(ans * 10) / 10);
+    calculation = ''
 })
