@@ -31,8 +31,9 @@ function operate(x, operator, y) {
 
 let display = document.querySelector('#solution');
 let buttons = document.querySelectorAll('.button');
-let clear = document.querySelector('.clear')
-let equal = document.querySelector('.equal')
+let clear = document.querySelector('.clear');
+let equal = document.querySelector('.equal');
+let operators = document.querySelectorAll('.operator');
 let calculation = '';
 let ans;
 
@@ -40,6 +41,20 @@ buttons.forEach(button => {
     button.addEventListener('click', (e) => {
         display.textContent += e.target.value;
         calculation += e.target.value;
+        console.log(calculation)
+    })
+})
+
+operators.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        let inputs = calculation.trim().split(' ');
+        console.log(inputs)
+        if (inputs.length > 3) {
+            ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]));
+            calculation = `${ans} ${e.target.value.trim()} `;
+            display.textContent = calculation;
+            console.log(calculation)
+        }
     })
 })
 
@@ -50,7 +65,8 @@ clear.addEventListener('click', (e) => {
 })
 
 equal.addEventListener('click', (e) => {
-    let inputs = calculation.split(' ');
+    let inputs = calculation.trim().split(' ');
+    console.log(inputs);
     if(ans == undefined) {
         ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]))
     } else {
