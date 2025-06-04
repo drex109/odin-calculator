@@ -34,6 +34,7 @@ let buttons = document.querySelectorAll('.button');
 let clear = document.querySelector('.clear');
 let equal = document.querySelector('.equal');
 let operators = document.querySelectorAll('.operator');
+let decimal = document.querySelector('.decimal')
 let calculation = '';
 let ans;
 
@@ -74,4 +75,10 @@ equal.addEventListener('click', (e) => {
     }
     display.textContent = String(Math.round(ans * 10) / 10);
     calculation = ''
+})
+
+decimal.addEventListener('click', (e) => {
+    if (display.textContent.includes('.')) {
+        
+    }
 })

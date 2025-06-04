@@ -2,7 +2,9 @@
     background-color:rgb(145, 114, 87);
     text-align: center;
 }
+
 #operation{
+    margin-top: 10em;
     display: flex;
     justify-content: center;
 }
@@ -30,15 +32,25 @@
 }
 .equal{
     background-color: green;
+    color: white;
     border-radius: 10%;
     padding: 1em;
     margin:.5rem;
     font-size: 2em;
+    margin-top: 4em;
 }
 .clear{
     background-color: darkred;
     color: white;
     padding: 1em .5em ;
+    margin:.5rem;
+    font-size: 2em;
+    margin-top: 4em;
+}
+.decimal{
+    background-color: rgb(168, 168, 58);
+    border-radius: 10%;
+    padding: 1em;
     margin:.5rem;
     font-size: 2em;
 }
