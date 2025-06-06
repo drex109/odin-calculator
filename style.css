@@ -23,13 +23,14 @@
     display: flex;
     justify-content: center;
 }
-.button{
+.button, .operator{
     padding: 1em;
     margin: .5rem;
     background-color: darkgray;
     border-radius: 10%;
     font-size: 2em;
 }
+
 .equal{
     background-color: green;
     color: white;

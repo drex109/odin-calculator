@@ -47,6 +47,7 @@ buttons.forEach(button => {
             ans = undefined;
             evaluated = false;
         }
+
         display.textContent += e.target.value;
         calculation += e.target.value;
 
@@ -57,6 +58,13 @@ buttons.forEach(button => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', (e) => {
+        if(evaluated) {
+            evaluated = false;
+        }
+        
+        display.textContent += e.target.value;
+        calculation += e.target.value;
+
         let inputs = calculation.trim().split(' ');
 
         console.log(inputs)
@@ -86,8 +94,8 @@ equal.addEventListener('click', (e) => {
     } else {
         ans = operate(ans, inputs[1].trim(), Number(inputs[2]))
     }
-    display.textContent = String(Math.round(ans * 10) / 10);
-    calculation = ''
+    display.textContent = String(Math.round(ans * 100) / 100);
+    // calculation = ''
     evaluated = true;
 })
 
