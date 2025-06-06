@@ -37,20 +37,31 @@ let operators = document.querySelectorAll('.operator');
 let decimal = document.querySelector('.decimal')
 let calculation = '';
 let ans;
+let evaluated = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', (e) => {
+        if (evaluated) {
+            display.textContent = '';
+            calculation = '';
+            ans = undefined;
+            evaluated = false;
+        }
         display.textContent += e.target.value;
         calculation += e.target.value;
+
         console.log(calculation)
+
     })
 })
 
 operators.forEach(operator => {
     operator.addEventListener('click', (e) => {
         let inputs = calculation.trim().split(' ');
+
         console.log(inputs)
-        if (inputs.length > 3) {
+
+        if (inputs.length >= 3) {
             ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]));
             calculation = `${ans} ${e.target.value.trim()} `;
             display.textContent = calculation;
@@ -67,7 +78,9 @@ clear.addEventListener('click', (e) => {
 
 equal.addEventListener('click', (e) => {
     let inputs = calculation.trim().split(' ');
+
     console.log(inputs);
+
     if(ans == undefined) {
         ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]))
     } else {
@@ -75,10 +88,15 @@ equal.addEventListener('click', (e) => {
     }
     display.textContent = String(Math.round(ans * 10) / 10);
     calculation = ''
+    evaluated = true;
 })
 
 decimal.addEventListener('click', (e) => {
-    if (display.textContent.includes('.')) {
-        
+    if (!display.textContent.includes('.')) {
+        display.textContent += e.target.value;
+        calculation += e.target.value;
+
+        console.log(calculation);
+
     }
 })
