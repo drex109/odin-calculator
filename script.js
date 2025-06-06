@@ -11,10 +11,6 @@ function divide(x, y) {
     if (y === 0) return 'nah bro';
     return x / y;
 }
-// console.log(add(2, 3))
-// console.log(subtract(2, 3))
-// console.log(multiply(2, 3))
-// console.log(divide(2, 3))
 
 function operate(x, operator, y) {
     switch(operator) {
@@ -71,7 +67,7 @@ operators.forEach(operator => {
 
         if (inputs.length >= 3) {
             ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]));
-            calculation = `${ans} ${e.target.value.trim()} `;
+            calculation = `${String(Math.round(ans * 100) / 100)} ${e.target.value.trim()} `;
             display.textContent = calculation;
             console.log(calculation)
         }
