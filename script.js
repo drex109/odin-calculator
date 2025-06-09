@@ -59,8 +59,8 @@ operators.forEach(operator => {
             evaluated = false;
         }
         
-        display.textContent += e.target.value;
-        calculation += e.target.value;
+        display.textContent += ` ${e.target.value} `;
+        calculation += ` ${e.target.value} `;
 
         let inputs = calculation.trim().split(' ');
 
@@ -70,7 +70,9 @@ operators.forEach(operator => {
             ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]));
             calculation = `${String(Math.round(ans * 100) / 100)} ${e.target.value.trim()} `;
             display.textContent = calculation;
+
             console.log(calculation)
+
         }
     })
 })
@@ -92,12 +94,14 @@ equal.addEventListener('click', (e) => {
         ans = operate(ans, inputs[1].trim(), Number(inputs[2]))
     }
     display.textContent = String(Math.round(ans * 100) / 100);
-    // calculation = ''
+
     evaluated = true;
 })
 
 decimal.addEventListener('click', (e) => {
-    if (!display.textContent.includes('.')) {
+    const currentNumber = calculation.split(' ').pop()
+
+    if (!currentNumber.includes('.')) {
         display.textContent += e.target.value;
         calculation += e.target.value;
 
@@ -107,6 +111,19 @@ decimal.addEventListener('click', (e) => {
 })
 
 backspace.addEventListener('click', (e) => {
-    display.textContent = display.textContent.slice(0, -1);
-    calculation = calculation.slice(0, -1);
+    if (evaluated) {
+        display.textContent = '';
+        calculation = '';
+        ans = undefined;
+        evaluated = false;
+        return;
+    }
+    if (display.textContent.endsWith(' ')) {
+        display.textContent = display.textContent.slice(0, -3);
+        calculation = calculation.slice(0, -3);
+    } else {
+        display.textContent = display.textContent.slice(0, -1);
+        calculation = calculation.slice(0, -1);
+    }
+    
 })
