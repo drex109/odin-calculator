@@ -30,7 +30,8 @@ let buttons = document.querySelectorAll('.button');
 let clear = document.querySelector('.clear');
 let equal = document.querySelector('.equal');
 let operators = document.querySelectorAll('.operator');
-let decimal = document.querySelector('.decimal')
+let decimal = document.querySelector('.decimal');
+let backspace = document.querySelector('.backspace');
 let calculation = '';
 let ans;
 let evaluated = false;
@@ -103,4 +104,9 @@ decimal.addEventListener('click', (e) => {
         console.log(calculation);
 
     }
+})
+
+backspace.addEventListener('click', (e) => {
+    display.textContent = display.textContent.slice(0, -1);
+    calculation = calculation.slice(0, -1);
 })
