@@ -53,18 +53,25 @@ buttons.forEach(button => {
     })
 })
 
+// stop operator from being pressed twice in a row
+
 operators.forEach(operator => {
     operator.addEventListener('click', (e) => {
         if(evaluated) {
             evaluated = false;
         }
-        
-        display.textContent += ` ${e.target.value} `;
-        calculation += ` ${e.target.value} `;
 
         let inputs = calculation.trim().split(' ');
+        const lastInput = inputs[inputs.length - 1];
 
-        console.log(inputs)
+        if (['+', '-', 'x', '/'].includes(lastInput)) {
+            return;
+        }
+
+        console.log(inputs);
+
+        display.textContent += ` ${e.target.value} `;
+        calculation += ` ${e.target.value} `;
 
         if (inputs.length >= 3) {
             ans = operate(Number(inputs[0]), inputs[1].trim(), Number(inputs[2]));
