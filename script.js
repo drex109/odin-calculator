@@ -53,8 +53,6 @@ buttons.forEach(button => {
     })
 })
 
-// stop operator from being pressed twice in a row
-
 operators.forEach(operator => {
     operator.addEventListener('click', (e) => {
         if(evaluated) {
@@ -134,3 +132,46 @@ backspace.addEventListener('click', (e) => {
     }
     
 })
+
+document.addEventListener('keydown', (e) => {
+    if (e.key >= '0' && e.key <= '9') {
+        const button = document.querySelector(`button[value="${e.key}"]`);
+        if (button) button.click();
+            return;
+    }
+
+    console.log(e.key)
+
+    const operators = {
+        '+': '+',
+        '-': '-',
+        '/': '/',
+        '*': 'x'
+    };
+
+    if (operators[e.key]) {
+        const button = document.querySelector(`button[value="${operators[e.key]}"]`);
+        if (button) button.click();
+        return;
+    }
+
+    if (e.key === '.') {
+        decimal.click()
+        return;
+    }
+
+    if(e.key === '=' || e.key === 'Enter') {
+        equal.click();
+        return;
+    }
+
+    if (e.key === 'Backspace') {
+        backspace.click();
+        return;
+    }
+
+    if (e.key === 'Escape') {
+        clear.click();
+        return;
+    }
+});
